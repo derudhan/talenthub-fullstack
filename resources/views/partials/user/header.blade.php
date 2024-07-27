@@ -5,7 +5,7 @@
             <span class="self-center text-lg md:text-2xl font-semibold whitespace-nowrap dark:text-white">THNews</span>
         </a>
         <div class="flex items-center space-x-4 md:order-2">
-            <button type="button" aria-controls="search-bar" aria-expanded="false" class="text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5 md:hidden" id="search-toggle">
+            {{-- <button type="button" aria-controls="search-bar" aria-expanded="false" class="text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5 md:hidden" id="search-toggle">
                 <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
                 </svg>
@@ -19,7 +19,7 @@
                     <span class="sr-only">Search icon</span>
                 </div>
                 <input type="text" id="search-navbar" class="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search...">
-            </div>
+            </div> --}}
             @if (Auth::check())
                 <div class="flex items-center">
                     <a href="{{ url('admin') }}" class="self-center text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800">Dashboard</a>
@@ -102,11 +102,11 @@
             </li>
         </ul>
     </div>
-    <div id="search-container" class="fixed inset-x-0 top-16 z-50 hidden bg-white dark:bg-gray-800 md:hidden">
+    {{-- <div id="search-container" class="fixed inset-x-0 top-16 z-50 hidden bg-white dark:bg-gray-800 md:hidden">
         <div class="p-4">
             <input type="text" class="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search...">
         </div>
-    </div>
+    </div> --}}
 </nav>
 <nav>
     <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1 p-4" id="navbar-menu">
@@ -188,7 +188,7 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        const searchToggle = document.getElementById('search-toggle');
+        // const searchToggle = document.getElementById('search-toggle');
         const menuToggle = document.getElementById('menu-toggle');
         const navbarMenu = document.getElementById('navbar-menu');
         const mobileMenu = document.getElementById('mobile-menu');
@@ -200,18 +200,18 @@
         const moreCategories = document.getElementById('more-categories');
         const regionsToggle = document.getElementById('regions-toggle');
         const regionsMenu = document.getElementById('regions-menu');
-        const searchContainer = document.getElementById('search-container');
+        // const searchContainer = document.getElementById('search-container');
 
-        searchToggle.addEventListener('click', function() {
-            navbarMenu.classList.add('hidden');
-            mobileMenu.classList.add('hidden');
-        });
+        // searchToggle.addEventListener('click', function() {
+        //     navbarMenu.classList.add('hidden');
+        //     mobileMenu.classList.add('hidden');
+        // });
 
-        searchToggle.addEventListener('click', function() {
-            searchContainer.classList.toggle('hidden');
-            navbarMenu.classList.add('hidden');
-            mobileMenu.classList.add('hidden');
-        });
+        // searchToggle.addEventListener('click', function() {
+        //     searchContainer.classList.toggle('hidden');
+        //     navbarMenu.classList.add('hidden');
+        //     mobileMenu.classList.add('hidden');
+        // });
 
         menuToggle.addEventListener('click', function() {
             mobileMenu.classList.toggle('hidden');
