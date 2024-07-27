@@ -18,7 +18,7 @@ class UserSeeder extends Seeder
 
         // Buat beberapa pengguna dengan peran yang sesuai
         User::create([
-            'name' => 'Admin',
+            'name' => 'Bang Admin',
             'email' => 'admin@mail.com',
             'password' => Hash::make('password'),
             'phone_number' => '1234567890',
@@ -28,7 +28,7 @@ class UserSeeder extends Seeder
         ]);
 
         User::create([
-            'name' => 'Anggi Marito',
+            'name' => 'Bang Editor',
             'email' => 'editor@mail.com',
             'password' => Hash::make('password'),
             'phone_number' => '0987654321',
@@ -38,7 +38,7 @@ class UserSeeder extends Seeder
         ]);
 
         User::create([
-            'name' => 'Bernadya',
+            'name' => 'Bang Wartawan',
             'email' => 'wartawan@mail.com',
             'password' => Hash::make('password'),
             'phone_number' => '1122334455',

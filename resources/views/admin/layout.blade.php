@@ -8,6 +8,7 @@
         <link rel="icon" href="{{ asset('images/icon.png') }}" type="image/svg+xml">
         @vite('resources/css/app.css')
         <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.10.2/dist/cdn.min.js" defer></script>
+        <x-head.tinymce-config />
     </head>
 
     <body class="flex h-screen bg-gray-100" x-data="{ sidebarOpen: false }">

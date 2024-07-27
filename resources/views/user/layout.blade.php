@@ -10,7 +10,7 @@
         <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.10.2/dist/cdn.min.js" defer></script>
     </head>
 
-    <body class="bg-gray-100 flex flex-col min-h-screen">
+    <body class="bg-gray-100 flex flex-col min-h-screen m-0 p-0 overflow-x-hidden">
         <!-- Header -->
         <div class="container mx-auto py-2">
             @include('partials.user.header', ['categories' => $categories])
@@ -18,15 +18,15 @@
 
         <div class="container mx-auto py-4">
             <!-- For large screens -->
-            <div class="hidden lg:grid grid-cols-12 gap-4">
+            <div class="hidden lg:grid grid-cols-12 gap-4 items-start">
                 <!-- Main Content and Slider -->
                 <main class="col-span-9">
                     @yield('content')
                 </main>
 
                 <!-- Sidebar -->
-                <aside class="col-span-3 bg-gray-100 bg-opacity-85 divide-y divide-gray-100 text-gray-900 p-4 h-full rounded-lg shadow-lg">
-                    @include('partials.user.sidebar', ['popularNews' => $popularNews, 'categories' => $categories])
+                <aside class="col-span-3 bg-gray-100 bg-opacity-85 divide-y divide-gray-100 text-gray-900 p-4 rounded-lg shadow-lg">
+                    @include('partials.user.sidebar', ['popularNews' => $popularNews, 'randomNews' => $randomNews])
                 </aside>
             </div>
 
@@ -38,7 +38,7 @@
                 </main>
 
                 <!-- Sidebar -->
-                <aside class="col-span-3 bg-gray-100 bg-opacity-85 divide-y divide-gray-100 text-gray-900 p-4 h-full rounded-lg shadow-lg">
+                <aside class="col-span-3 bg-gray-100 bg-opacity-85 divide-y divide-gray-100 text-gray-900 p-4 rounded-lg shadow-lg">
                     @include('partials.user.sidebar', ['popularNews' => $popularNews, 'categories' => $categories])
                 </aside>
             </div>

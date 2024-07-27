@@ -22,7 +22,7 @@
             </div>
             @if (Auth::check())
                 <div class="flex items-center">
-                    <a href="{{ url('admin') }}" class="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800">Dashboard</a>
+                    <a href="{{ url('admin') }}" class="self-center text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800">Dashboard</a>
                     <div class="relative flex items-center ms-3" x-data="{ open: false }">
                         <div>
                             <button @click="open = !open" type="button" class="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" aria-expanded="false">
@@ -30,7 +30,7 @@
                                 <img class="w-8 h-8 rounded-full object-cover" src="{{ Auth::user()->profile_photo ? asset(Auth::user()->profile_photo) : 'https://via.placeholder.com/40' }}" alt="user photo">
                             </button>
                         </div>
-                        <div x-show="open" @click.away="open = false" class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50 dark:bg-gray-700 dark:divide-gray-600" style="display: none; top: calc(100% + 0.5rem);">
+                        <div x-show="open" @click.away="open = false" class="absolute right-0 w-48 bg-white rounded-md shadow-lg py-1 z-50 dark:bg-gray-700 dark:divide-gray-600" style="display: none; top: calc(100% + 0.5rem);">
                             <div class="px-4 py-3 border-b border-gray-200 dark:border-gray-600">
                                 <p class="text-sm font-semibold text-gray-900 dark:text-white">{{ Auth::user()->name }}</p>
                             </div>
@@ -49,7 +49,9 @@
                     </div>
                 </div>
             @else
-                <a href="{{ route('login') }}" class="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800">Login</a>
+                <div class="flex justify-center align-middle">
+                    <a href="{{ route('login') }}" class="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800">Login</a>
+                </div>
             @endif
             <button type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" id="menu-toggle" aria-controls="navbar-menu" aria-expanded="false">
                 <span class="sr-only">Open main menu</span>
@@ -67,7 +69,7 @@
             </li>
             @foreach ($categories->take(5) as $category)
                 <li>
-                    <a href="{{ route('category', ['category' => strtolower($category->name)]) }}" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">{{ $category->name }}</a>
+                    <a href="{{ route('category', ['category' => $category->name]) }}" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">{{ $category->name }}</a>
                 </li>
             @endforeach
             @if ($categories->count() > 5)
@@ -80,21 +82,21 @@
                     </button>
                     <div class="hidden mt-2 space-y-2" id="more-categories-mobile">
                         @foreach ($categories->skip(5) as $category)
-                            <a href="{{ route('category', ['category' => strtolower($category->name)]) }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700">{{ $category->name }}</a>
+                            <a href="{{ route('category', ['category' => $category->name]) }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700">{{ $category->name }}</a>
                         @endforeach
                     </div>
                 </li>
             @endif
             <li class="relative">
                 <button class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 flex items-center" id="regions-toggle-mobile">
-                    Regions
+                    Wilayah
                     <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                     </svg>
                 </button>
                 <div class="hidden mt-2 space-y-2" id="regions-menu-mobile">
                     @foreach ($regions as $region)
-                        <a href="{{ route('region', ['region' => strtolower($region->name)]) }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700">{{ $region->name }}</a>
+                        <a href="{{ route('region', ['region' => $region->name]) }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700">{{ $region->name }}</a>
                     @endforeach
                 </div>
             </li>
@@ -110,38 +112,72 @@
     <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1 p-4" id="navbar-menu">
         <ul class="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-gray-100 dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
             <li>
-                <a href="{{ url('/') }}" class="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500 dark:bg-blue-600 md:dark:bg-transparent" aria-current="page">Home</a>
+                @if (request()->is('/'))
+                    <a href="{{ url('/') }}" class="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500 dark:bg-blue-600 md:dark:bg-transparent" aria-current="page">Home</a>
+                @else
+                    <a href="{{ url('/') }}" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Home</a>
+                @endif
             </li>
-            @foreach ($categories->take(7) as $category)
+            @foreach ($categories->take(5) as $category)
                 <li>
-                    <a href="{{ route('category', ['category' => strtolower($category->name)]) }}" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">{{ $category->name }}</a>
+                    @if (request()->is('category/' . $category->name))
+                        <a href="{{ route('category', ['category' => $category->name]) }}" class="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500 dark:bg-blue-600 md:dark:bg-transparent" aria-current="page">{{ $category->name }}</a>
+                    @else
+                        <a href="{{ route('category', ['category' => $category->name]) }}" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">{{ $category->name }}</a>
+                    @endif
                 </li>
             @endforeach
-            @if ($categories->count() > 7)
+            @if ($categories->count() > 5)
                 <li class="relative">
-                    <button class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent flex items-center" id="more-categories-toggle">
-                        Lainnya
-                        <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                        </svg>
-                    </button>
+                    @if (request()->is('category/*'))
+                        <button class="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500 dark:bg-blue-600 md:dark:bg-transparent flex items-center" id="more-categories-toggle">
+                            Lainnya
+                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                    @else
+                        <button class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent flex items-center" id="more-categories-toggle">
+                            Lainnya
+                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                    @endif
                     <div class="absolute z-10 hidden w-48 py-2 mt-2 bg-gray-100 border rounded-lg shadow-lg dark:bg-gray-800 dark:border-gray-700" id="more-categories">
-                        @foreach ($categories->skip(7) as $category)
-                            <a href="{{ route('category', ['category' => strtolower($category->name)]) }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700">{{ $category->name }}</a>
+                        @foreach ($categories->skip(5) as $category)
+                            @if (request()->is('category/' . $category->name))
+                                <a href="{{ route('category', ['category' => $category->name]) }}" class="block px-4 py-2 text-sm text-blue-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700">{{ $category->name }}</a>
+                            @else
+                                <a href="{{ route('category', ['category' => $category->name]) }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700">{{ $category->name }}</a>
+                            @endif
                         @endforeach
                     </div>
                 </li>
             @endif
             <li class="relative">
-                <button class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent flex items-center" id="regions-toggle">
-                    Regions
-                    <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                    </svg>
-                </button>
+                @if (request()->is('region/*'))
+                    <button class="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500 dark:bg-blue-600 md:dark:bg-transparent flex items-center" id="regions-toggle">
+                        Wilayah
+                        <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                @else
+                    <button class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent flex items-center" id="regions-toggle">
+                        Wilayah
+                        <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                @endif
                 <div class="absolute z-10 hidden w-48 py-2 mt-2 bg-gray-100 border rounded-lg shadow-lg dark:bg-gray-800 dark:border-gray-700" id="regions-menu">
                     @foreach ($regions as $region)
-                        <a href="{{ route('region', ['region' => strtolower($region->name)]) }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700">{{ $region->name }}</a>
+                        @if (request()->is('region/' . $region->name))
+                            <a href="{{ route('region', ['region' => $region->name]) }}" class="block px-4 py-2 text-sm text-blue-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700">{{ $region->name }}</a>
+                        @else
+                            <a href="{{ route('region', ['region' => $region->name]) }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700">{{ $region->name }}</a>
+                        @endif
                     @endforeach
                 </div>
             </li>

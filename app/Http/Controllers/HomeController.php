@@ -14,22 +14,7 @@ class HomeController extends Controller
     {
         $news = News::with(['category', 'region'])->latest()->get();
 
-        // Get categories by name
-        $edukasiCategory = Category::where('name', 'Edukasi')->first();
-        $komunitasCategory = Category::where('name', 'Komunitas')->first();
-        $opiniCategory = Category::where('name', 'Opini')->first();
-
-        // Get news based on the categories
-        $editorChoiceMain = News::where('category_id', $edukasiCategory->id)->latest()->first();
-        $editorChoiceNews = News::where('category_id', $edukasiCategory->id)->latest()->take(5)->get();
-
-        $komunitasMain = News::where('category_id', $komunitasCategory->id)->latest()->first();
-        $komunitasNews = News::where('category_id', $komunitasCategory->id)->latest()->take(5)->get();
-
-        $opiniMain = News::where('category_id', $opiniCategory->id)->latest()->first();
-        $opiniNews = News::where('category_id', $opiniCategory->id)->latest()->take(5)->get();
-
-        $perPage = 6;
+        $perPage = 9;
         $currentPage = LengthAwarePaginator::resolveCurrentPage();
         $currentItems = $news->slice(($currentPage - 1) * $perPage, $perPage)->all();
         $paginatedNews = new LengthAwarePaginator($currentItems, $news->count(), $perPage, $currentPage, [
@@ -37,10 +22,11 @@ class HomeController extends Controller
         ]);
 
         $popularNews = News::with('category')->orderBy('views', 'desc')->take(5)->get();
+        $randomNews = News::with('category')->inRandomOrder()->take(3)->get();
         $categories = Category::all();
         $regions = Region::all();
 
-        return view('user.home', compact('news', 'paginatedNews', 'popularNews', 'categories', 'regions', 'editorChoiceMain', 'editorChoiceNews', 'komunitasMain', 'komunitasNews', 'opiniMain', 'opiniNews'));
+        return view('user.home', compact('news', 'paginatedNews', 'popularNews', 'categories', 'regions', 'randomNews'));
     }
 
     public function category($category)
@@ -49,33 +35,36 @@ class HomeController extends Controller
         $paginatedNews = News::where('category_id', $categoryModel->id)->latest()->paginate(6);
 
         $popularNews = News::with('category')->orderBy('views', 'desc')->take(5)->get();
+        $randomNews = News::with('category')->inRandomOrder()->take(3)->get();
         $categories = Category::all();
         $regions = Region::all();
 
-        return view('user.category', compact('category', 'paginatedNews', 'popularNews', 'categories', 'regions'));
+        return view('user.category', compact('category', 'paginatedNews', 'popularNews', 'categories', 'regions', 'randomNews'));
     }
 
 
     public function region($region)
     {
         $regionModel = Region::where('name', $region)->firstOrFail();
-        $news = News::where('region_id', $regionModel->id)->latest()->paginate(6);
+        $paginatedNews = News::where('region_id', $regionModel->id)->latest()->paginate(6);
 
         $popularNews = News::with('category')->orderBy('views', 'desc')->take(5)->get();
+        $randomNews = News::with('category')->inRandomOrder()->take(3)->get();
         $categories = Category::all();
         $regions = Region::all();
 
-        return view('user.region', compact('region', 'news', 'popularNews', 'categories', 'regions'));
+        return view('user.region', compact('region', 'paginatedNews', 'popularNews', 'categories', 'regions', 'randomNews'));
     }
 
     public function detail($id)
     {
         $newsItem = News::with(['category', 'region'])->findOrFail($id);
         $popularNews = News::with('category')->orderBy('views', 'desc')->take(5)->get();
+        $randomNews = News::with('category')->inRandomOrder()->take(3)->get();
         $categories = Category::all();
         $regions = Region::all();
         $relatedNews = News::where('category_id', $newsItem->category_id)->where('id', '!=', $id)->take(3)->get();
 
-        return view('user.detail', compact('newsItem', 'popularNews', 'categories', 'regions', 'relatedNews'));
+        return view('user.detail', compact('newsItem', 'popularNews', 'categories', 'regions', 'relatedNews', 'randomNews'));
     }
 }

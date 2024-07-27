@@ -19,9 +19,9 @@ class NewsSeeder extends Seeder
         $categories = Category::all();
         $regions = Region::all();
 
-        $jumlahBerita = 13;
+        $jumlahBerita = 25;
 
-        $lorem = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum a velit velit. Nullam suscipit interdum sem vel auctor. Duis id leo ut augue viverra suscipit sit amet eget arcu. Pellentesque id erat in nibh viverra bibendum. Suspendisse nec bibendum nisl, nec aliquet sapien. Nulla tincidunt condimentum dictum. Maecenas pulvinar ante in arcu euismod facilisis.';
+        $lorem = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum a velit velit. Nullam suscipit interdum sem vel auctor. Duis id leo ut augue viverra suscipit sit amet eget arcu. Pellentesque id erat in nibh viverra bibendum. Suspendisse nec bibendum nisl, nec aliquet sapien. Nulla tincidunt condimentum dictum. Maecenas pulvinar ante in arcu euismod facilisis.";
 
         for ($i = 0; $i < $jumlahBerita; $i++) {
             $randomCategory = $categories->random();

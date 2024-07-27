@@ -9,7 +9,7 @@ class RegionController extends Controller
 {
     public function index()
     {
-        $regions = Region::latest()->paginate(5);
+        $regions = Region::latest()->paginate(10);
         return view('admin.regions.index', compact('regions'))->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
